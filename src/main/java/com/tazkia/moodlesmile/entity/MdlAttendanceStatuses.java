@@ -22,7 +22,7 @@ public class MdlAttendanceStatuses {
     private String acronym;
 
     @NotNull
-    private String desscription;
+    private String description;
 
     @NotNull
     private BigDecimal grade;

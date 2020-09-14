@@ -21,8 +21,9 @@ public class MdlAttendanceLog {
     @JoinColumn(name="studentid", referencedColumnName="id")
     private MdlUser studentid;
 
-    @NotNull
-    private BigInteger statusid;
+    @ManyToOne
+    @JoinColumn(name ="statusid", referencedColumnName ="id")
+    private MdlAttendanceStatuses statusid;
 
     private String statusset;
 
