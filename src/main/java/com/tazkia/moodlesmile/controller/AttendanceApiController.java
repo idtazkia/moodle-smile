@@ -4,22 +4,23 @@ package com.tazkia.moodlesmile.controller;
 import com.tazkia.moodlesmile.dao.MdlAttendanceDao;
 import com.tazkia.moodlesmile.dao.MdlAttendanceLogDao;
 import com.tazkia.moodlesmile.dao.MdlAttendanceSessionsDao;
+import com.tazkia.moodlesmile.dao.MdlCourseDao;
+import com.tazkia.moodlesmile.dto.CourseDto;
 import com.tazkia.moodlesmile.dto.MdlAttendanceLogDto;
 import com.tazkia.moodlesmile.entity.MdlAttendanceLog;
 import com.tazkia.moodlesmile.entity.MdlAttendanceSessions;
+import com.tazkia.moodlesmile.entity.MdlCourse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 public class AttendanceApiController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AttendanceApiController.class);
@@ -34,12 +35,17 @@ public class AttendanceApiController {
     @Autowired
     private MdlAttendanceSessionsDao mdlAttendanceSessionsDao;
 
+    @Autowired
+    private MdlCourseDao mdlCourseDao;
+
 
     @GetMapping("/api/session")
     @ResponseBody
-    public List<MdlAttendanceLogDto> attendanceLog(@RequestParam BigInteger sessionid){
+    public List<MdlAttendanceLogDto> attendanceLog(){
 
-    List<MdlAttendanceLog> alog = mdlAttendanceLogDao.findBySessionid(mdlAttendanceSessionsDao.findById(sessionid).get());
+//    List<MdlCourse> cors = mdlCourseDao.findByIdnumberContaining("20201");
+//    List<MdlAttendanceLog> alog = mdlAttendanceLogDao.findBySessionidAttendanceidCourseIdnumberAndIpaddressIsNotNull(cors);
+    List<MdlAttendanceLog> alog = mdlAttendanceLogDao.findJadwalSekarang();
     List<MdlAttendanceLogDto> adto = new ArrayList<>();
 
 
@@ -48,8 +54,10 @@ public class AttendanceApiController {
         mdlAttendanceLogDto.setId(mdlAttendanceLog.getId());
 
         mdlAttendanceLogDto.setStudentid(mdlAttendanceLog.getStudentid().getId());
+        mdlAttendanceLogDto.setIdnumbernim(mdlAttendanceLog.getStudentid().getIdnumber());
         mdlAttendanceLogDto.setFirstname(mdlAttendanceLog.getStudentid().getFirstname());
         mdlAttendanceLogDto.setTakenby(mdlAttendanceLog.getTakenby().getFirstname());
+        mdlAttendanceLogDto.setEmail(mdlAttendanceLog.getStudentid().getEmail());
 
         mdlAttendanceLogDto.setSessionid(mdlAttendanceLog.getSessionid().getId());
         mdlAttendanceLogDto.setSessdate(mdlAttendanceLog.getSessionid().getSessdate());
@@ -63,6 +71,8 @@ public class AttendanceApiController {
 
         mdlAttendanceLogDto.setCourse(mdlAttendanceLog.getSessionid().getAttendanceid().getCourse().getId());
         mdlAttendanceLogDto.setFullname(mdlAttendanceLog.getSessionid().getAttendanceid().getCourse().getFullname());
+        mdlAttendanceLogDto.setShortname(mdlAttendanceLog.getSessionid().getAttendanceid().getCourse().getShortname());
+        mdlAttendanceLogDto.setIdnumbercourse(mdlAttendanceLog.getSessionid().getAttendanceid().getCourse().getIdnumber());
 
         adto.add(mdlAttendanceLogDto);
         }
@@ -71,6 +81,9 @@ public class AttendanceApiController {
 
     }
 
-
+//    @PostMapping("")
+//    public void insertCourse(@RequestBody CourseDto courseDto){
+//        // insert ke tabel
+//    }
 
 }

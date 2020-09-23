@@ -23,6 +23,8 @@ public class MdlAttendanceLogDto {
     //user
     private BigInteger studentid;
     private String firstname;
+    private String idnumbernim;
+    private String email;
     private String takenby;
 
     //session
@@ -41,5 +43,7 @@ public class MdlAttendanceLogDto {
     //course
     private BigInteger course;
     private String fullname;
+    private String shortname;
+    private String idnumbercourse;
 
 }
