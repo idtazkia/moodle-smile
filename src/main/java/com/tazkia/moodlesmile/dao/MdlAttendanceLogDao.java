@@ -1,6 +1,7 @@
 package com.tazkia.moodlesmile.dao;
 
 import com.tazkia.moodlesmile.dto.MdlAttendanceLogDto;
+import com.tazkia.moodlesmile.dto.MdlAttendanceLogIntDto;
 import com.tazkia.moodlesmile.entity.MdlAttendanceLog;
 import com.tazkia.moodlesmile.entity.MdlAttendanceSessions;
 import com.tazkia.moodlesmile.entity.MdlCourse;
@@ -17,16 +18,19 @@ public interface MdlAttendanceLogDao extends PagingAndSortingRepository<MdlAtten
 
 
 
-    @Query(value = "SELECT *, FROM_UNIXTIME (b.lasttaken, '%d/%m/%Y') AS taken\n" +
-            "FROM mdl_attendance_log AS a\n" +
-            "INNER JOIN mdl_attendance_sessions AS b ON a.sessionid - b.id\n" +
-            "INNER JOIN mdl_attendance AS c ON b.attendanceid = c.id\n" +
-            "INNER JOIN mdl_course AS d ON c.course = d.id\n" +
-            "INNER JOIN mdl_user AS e on a.studentid = e.id\n" +
-            "WHERE b.lasttaken IS NOT NULL\n" +
-            "AND FROM_UNIXTIME (b.lasttaken, '%d/%m/%Y') = DATE_FORMAT(NOW(), '%d/%m/%Y') AND ipaddress IS NOT NULL \n" +
-            "AND d.idnumber LIKE '%20201%';", nativeQuery = true)
-    List<MdlAttendanceLog> findJadwalSekarang();
+    //find dosen
+    @Query(value = "SELECT b.id AS id, '6cf08aa7-fc62-40f3-b82d-ff04be2c8905' AS idTahunAkademik, e.shortname AS idJadwal, FROM_UNIXTIME(a.timetaken, '%d/%m/%Y %h:%m:%s') AS waktuMasuk, \n" +
+            "FROM_UNIXTIME(e.enddate, '%d/%m/%Y %h:%m:%s') AS waktuSelesai,'HADIR' AS statusPresensi, 'AKTIF' AS status, f.email AS idDosen\n" +
+            "FROM mdl_attendance_log AS a \n" +
+            "INNER JOIN mdl_attendance_sessions AS b ON a.sessionid = b.id\n" +
+            "INNER JOIN mdl_attendance AS c ON b.attendanceid = c.id \n" +
+            "INNER JOIN mdl_attendance_statuses AS d ON c.id = d.attendanceid AND a.statusid = d.id\n" +
+            "INNER JOIN mdl_course AS e ON c.course = e.id\n" +
+            "INNER JOIN mdl_user AS f ON a.takenby = f.id\n" +
+            "INNER JOIN mdl_user AS g ON a.studentid = g.id\n" +
+            "WHERE e.fullname LIKE '%20201%'\n" +
+            "GROUP BY b.id;", nativeQuery = true)
+    List<MdlAttendanceLogIntDto> findJadwalSekarang();
 
 
 }
