@@ -98,6 +98,37 @@ public class AttendanceApiController {
 
     }
 
+    @GetMapping("/api/sessionmahasiswa2")
+    @ResponseBody
+    public List<MdlAttendanceLogMahasiswaDto> attendanceLogMahasiswa2(@RequestParam String id){
+
+        List<MdlAttendanceLogMahasiswaIntDto> alog = mdlAttendanceLogDao.findJadwalSekarangMahasiswa2(id);
+        List<MdlAttendanceLogMahasiswaDto> adto = new ArrayList<>();
+
+//    adto.addAll(alog);
+
+
+        for (MdlAttendanceLogMahasiswaIntDto mdlAttendanceLog : alog){
+            MdlAttendanceLogMahasiswaDto mdlAttendanceLogMahasiswaDto = new MdlAttendanceLogMahasiswaDto();
+
+            mdlAttendanceLogMahasiswaDto.setIdlog(mdlAttendanceLog.getId());
+            mdlAttendanceLogMahasiswaDto.setIdTahunAkademik(mdlAttendanceLog.getIdTahunAkademik());
+            mdlAttendanceLogMahasiswaDto.setIdJadwal(mdlAttendanceLog.getIdJadwal());
+            mdlAttendanceLogMahasiswaDto.setWaktuMasuk(mdlAttendanceLog.getWaktuMasuk());
+            mdlAttendanceLogMahasiswaDto.setWaktuSelesai(mdlAttendanceLog.getWaktuSelesai());
+            mdlAttendanceLogMahasiswaDto.setStatusPresensi(mdlAttendanceLog.getStatusPresensi());
+            mdlAttendanceLogMahasiswaDto.setStatus(mdlAttendanceLog.getStatus());
+            mdlAttendanceLogMahasiswaDto.setMahasiswa(mdlAttendanceLog.getMahasiswa());
+
+
+
+            adto.add(mdlAttendanceLogMahasiswaDto);
+        }
+
+        return adto;
+
+    }
+
 //    @PostMapping("")
 //    public void insertCourse(@RequestBody CourseDto courseDto){
 //        // insert ke tabel
