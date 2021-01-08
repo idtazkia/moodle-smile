@@ -12,7 +12,7 @@ import java.time.LocalTime;
 @Data
 public class MdlAttendanceLogDosenDto {
 
-    private BigInteger idlog;
+    private BigInteger idSession;
     private String idTahunAkademik;
     private String idJadwal;
     private String waktuMasuk;
@@ -21,6 +21,7 @@ public class MdlAttendanceLogDosenDto {
     private String status;
     private String idDosen;
     private String beritaAcara;
+    private String idLog;
 
 
 

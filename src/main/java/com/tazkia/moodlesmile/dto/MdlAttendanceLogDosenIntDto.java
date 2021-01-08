@@ -14,4 +14,5 @@ public interface MdlAttendanceLogDosenIntDto {
     String getStatus();
     String getIdDosen();
     String getBeritaAcara();
+    String getIdLog();
 }

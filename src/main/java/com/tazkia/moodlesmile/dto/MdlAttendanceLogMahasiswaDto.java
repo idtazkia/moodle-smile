@@ -8,7 +8,7 @@ import java.math.BigInteger;
 public class MdlAttendanceLogMahasiswaDto {
 
 
-    private BigInteger idlog;
+    private BigInteger idSession;
     private String idTahunAkademik;
     private String idJadwal;
     private String waktuMasuk;
