@@ -37,4 +37,6 @@ public class MdlAttendanceLog {
     private String remarks;
 
     private String ipaddress;
+
+    private String statusimport;
 }

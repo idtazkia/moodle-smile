@@ -3,22 +3,25 @@ package com.tazkia.moodlesmile.dao;
 import com.tazkia.moodlesmile.dto.MdlAttendanceLogDosenIntDto;
 import com.tazkia.moodlesmile.dto.MdlAttendanceLogMahasiswaIntDto;
 import com.tazkia.moodlesmile.entity.MdlAttendanceLog;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface MdlAttendanceLogDao extends PagingAndSortingRepository<MdlAttendanceLog, BigInteger> {
 
 //    List<MdlAttendanceLog> findBySessionidAttendanceidCourseIdnumberAndIpaddressIsNotNull(List<MdlCourse> mdlCourse);
 
-
-
+    @Modifying
+    @Query(value = "update mdl_attendance_log set statusimport = 'Berhasil' where sessionid = ?1", nativeQuery = true)
+    void updateMdlLog(BigInteger id);
 
     //find dosen
     @Query(value = "SELECT b.id AS id, '6cf08aa7-fc62-40f3-b82d-ff04be2c8905' AS idTahunAkademik,e.fullname AS namaMatakuliah, e.shortname AS idJadwal, FROM_UNIXTIME(a.timetaken, '%Y-%m-%d %h:%m:%s') AS waktuMasuk, \n" +
-            "FROM_UNIXTIME(e.enddate, '%Y-%m-%d %h:%m:%s') AS waktuSelesai,'HADIR' AS statusPresensi, 'AKTIF' AS status, f.email AS idDosen, b.description AS beritaAcara\n" +
+            "FROM_UNIXTIME(e.enddate, '%Y-%m-%d %h:%m:%s') AS waktuSelesai,'HADIR' AS statusPresensi, 'AKTIF' AS status, f.email AS idDosen, b.description AS beritaAcara, a.id as idLog\n" +
             "FROM mdl_attendance_log AS a \n" +
             "INNER JOIN mdl_attendance_sessions AS b ON a.sessionid = b.id\n" +
             "INNER JOIN mdl_attendance AS c ON b.attendanceid = c.id \n" +
@@ -26,9 +29,9 @@ public interface MdlAttendanceLogDao extends PagingAndSortingRepository<MdlAtten
             "INNER JOIN mdl_course AS e ON c.course = e.id\n" +
             "INNER JOIN mdl_user AS f ON b.lasttakenby = f.id\n" +
             "INNER JOIN mdl_user AS g ON a.studentid = g.id\n" +
-            "WHERE e.fullname LIKE '%20201%' AND LENGTH(e.shortname)= 36 \n" +
+            "WHERE e.fullname LIKE '%20201%' AND LENGTH(e.shortname)= 36 AND a.statusimport is null AND FROM_UNIXTIME(a.timetaken, '%Y-%m-%d') = ?1 AND a.statusimport is null \n" +
             "GROUP BY b.id", nativeQuery = true)
-    List<MdlAttendanceLogDosenIntDto> findJadwalSekarangDosen();
+    List<MdlAttendanceLogDosenIntDto> findJadwalSekarangDosen(LocalDate tanggalImport);
 
 
     @Query(value = "SELECT b.id AS id, '6cf08aa7-fc62-40f3-b82d-ff04be2c8905' AS idTahunAkademik,e.fullname AS namaMatakuliah, e.shortname AS idJadwal, FROM_UNIXTIME(a.timetaken, '%Y-%m-%d %h:%m:%s') AS waktuMasuk, \n" +
