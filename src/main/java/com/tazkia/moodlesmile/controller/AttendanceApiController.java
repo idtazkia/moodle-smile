@@ -94,6 +94,39 @@ public class AttendanceApiController {
 
     }
 
+//    @GetMapping("/api/sessiondosen2")
+//    @ResponseBody
+//    public List<MdlAttendanceLogDosenDto> attendanceLogDosen2(){
+//
+//        List<MdlAttendanceLogDosenIntDto> alog = mdlAttendanceLogDao.findJadwalSekarangDosen2();
+//        List<MdlAttendanceLogDosenDto> adto = new ArrayList<>();
+//
+////    adto.addAll(alog);
+//
+//
+//        for (MdlAttendanceLogDosenIntDto mdlAttendanceLog : alog){
+//            MdlAttendanceLogDosenDto mdlAttendanceLogDosenDto = new MdlAttendanceLogDosenDto();
+//
+//            mdlAttendanceLogDosenDto.setIdSession(mdlAttendanceLog.getId());
+//            mdlAttendanceLogDosenDto.setIdTahunAkademik(mdlAttendanceLog.getIdTahunAkademik());
+//            mdlAttendanceLogDosenDto.setIdJadwal(mdlAttendanceLog.getIdJadwal());
+//            mdlAttendanceLogDosenDto.setWaktuMasuk(mdlAttendanceLog.getWaktuMasuk());
+//            mdlAttendanceLogDosenDto.setWaktuSelesai(mdlAttendanceLog.getWaktuSelesai());
+//            mdlAttendanceLogDosenDto.setStatusPresensi(mdlAttendanceLog.getStatusPresensi());
+//            mdlAttendanceLogDosenDto.setStatus(mdlAttendanceLog.getStatus());
+//            mdlAttendanceLogDosenDto.setIdDosen(mdlAttendanceLog.getIdDosen());
+//            mdlAttendanceLogDosenDto.setBeritaAcara(mdlAttendanceLog.getBeritaAcara());
+//            mdlAttendanceLogDosenDto.setIdLog(mdlAttendanceLog.getIdLog());
+//
+//
+//
+//            adto.add(mdlAttendanceLogDosenDto);
+//        }
+//
+//        return adto;
+//
+//    }
+
 
     @GetMapping("/api/sessionmahasiswa")
     @ResponseBody
