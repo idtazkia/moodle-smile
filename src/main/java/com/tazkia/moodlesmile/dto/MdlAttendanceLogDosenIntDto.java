@@ -10,6 +10,7 @@ public interface MdlAttendanceLogDosenIntDto {
     String getIdJadwal();
     String getWaktuMasuk();
     String getWaktuSelesai();
+    String getTanggalInput();
     String getStatusPresensi();
     String getStatus();
     String getIdDosen();

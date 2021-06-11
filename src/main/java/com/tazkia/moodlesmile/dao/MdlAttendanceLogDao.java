@@ -21,7 +21,7 @@ public interface MdlAttendanceLogDao extends PagingAndSortingRepository<MdlAtten
 
     //find dosen
     @Query(value = "SELECT b.id AS id, 'ac02591c-2f3a-498e-9a91-404e96294d9d' AS idTahunAkademik,e.fullname AS namaMatakuliah, e.idnumber AS idJadwal, FROM_UNIXTIME(b.sessdate, '%Y-%m-%d') AS waktuMasuk, \n" +
-            "FROM_UNIXTIME(b.sessdate, '%Y-%m-%d') AS waktuSelesai,'HADIR' AS statusPresensi, 'AKTIF' AS status, f.email AS idDosen, b.description AS beritaAcara, a.id as idLog\n" +
+            "FROM_UNIXTIME(b.sessdate, '%Y-%m-%d') AS waktuSelesai,FROM_UNIXTIME(a.timetaken, '%Y-%m-%d') as tanggalInput,'HADIR' AS statusPresensi, 'AKTIF' AS status, f.email AS idDosen, b.description AS beritaAcara, a.id as idLog\n" +
             "FROM mdl_attendance_log AS a \n" +
             "INNER JOIN mdl_attendance_sessions AS b ON a.sessionid = b.id\n" +
             "INNER JOIN mdl_attendance AS c ON b.attendanceid = c.id \n" +

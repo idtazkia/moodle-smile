@@ -79,6 +79,7 @@ public class AttendanceApiController {
         mdlAttendanceLogDosenDto.setIdJadwal(mdlAttendanceLog.getIdJadwal());
         mdlAttendanceLogDosenDto.setWaktuMasuk(mdlAttendanceLog.getWaktuMasuk());
         mdlAttendanceLogDosenDto.setWaktuSelesai(mdlAttendanceLog.getWaktuSelesai());
+        mdlAttendanceLogDosenDto.setTanggalInput(mdlAttendanceLog.getTanggalInput());
         mdlAttendanceLogDosenDto.setStatusPresensi(mdlAttendanceLog.getStatusPresensi());
         mdlAttendanceLogDosenDto.setStatus(mdlAttendanceLog.getStatus());
         mdlAttendanceLogDosenDto.setIdDosen(mdlAttendanceLog.getIdDosen());
