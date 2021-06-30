@@ -234,4 +234,182 @@ public class AssessmentApiController {
 
     }
 
+
+    @GetMapping("/api/nilaitugas2")
+    @ResponseBody
+    public List<MdlGradeGradesDto> nilaitugas2(){
+
+        List<MdlGradeGradesIntDto> nilaitugas1 = mdlGradeItemsDao.getGradesTugas2();
+        List<MdlGradeGradesDto> nilaitugas2 = new ArrayList<>();
+
+        for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaitugas1){
+            MdlGradeGradesDto mdlGradeGradesDto = new MdlGradeGradesDto();
+
+            mdlGradeGradesDto.setId(mdlGradeGradesIntDto.getId());
+            mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
+            mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
+            mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
+            mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
+            mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
+            mdlGradeGradesDto.setNilai(mdlGradeGradesIntDto.getNilai());
+            mdlGradeGradesDto.setNilaiAkhir(mdlGradeGradesIntDto.getNilaiAkhir());
+            mdlGradeGradesDto.setBobot(mdlGradeGradesIntDto.getBobot());
+
+
+            nilaitugas2.add(mdlGradeGradesDto);
+        }
+
+        return nilaitugas2;
+    }
+
+
+
+    @GetMapping("/api/nilaiuts2")
+    @ResponseBody
+    public List<MdlGradeGradesDto> nilaiuts2(){
+
+        List<MdlGradeGradesIntDto> nilaiuts1 = mdlGradeItemsDao.getGradesUts2();
+        List<MdlGradeGradesDto> nilaiuts2 = new ArrayList<>();
+
+        for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaiuts1){
+            MdlGradeGradesDto mdlGradeGradesDto = new MdlGradeGradesDto();
+
+            mdlGradeGradesDto.setId(mdlGradeGradesIntDto.getId());
+            mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
+            mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
+            mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
+            mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
+            mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
+            mdlGradeGradesDto.setNilai(mdlGradeGradesIntDto.getNilai());
+            mdlGradeGradesDto.setNilaiAkhir(mdlGradeGradesIntDto.getNilaiAkhir());
+            mdlGradeGradesDto.setBobot(mdlGradeGradesIntDto.getBobot());
+
+
+            nilaiuts2.add(mdlGradeGradesDto);
+        }
+
+        return nilaiuts2;
+
+    }
+
+    @GetMapping("/api/nilaiuas2")
+    @ResponseBody
+    public List<MdlGradeGradesDto> nilaiuas2(){
+
+        List<MdlGradeGradesIntDto> nilaiuas1 = mdlGradeItemsDao.getGradesUas2();
+        List<MdlGradeGradesDto> nilaiuas2 = new ArrayList<>();
+
+        for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaiuas1){
+            MdlGradeGradesDto mdlGradeGradesDto = new MdlGradeGradesDto();
+
+            mdlGradeGradesDto.setId(mdlGradeGradesIntDto.getId());
+            mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
+            mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
+            mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
+            mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
+            mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
+            mdlGradeGradesDto.setNilai(mdlGradeGradesIntDto.getNilai());
+            mdlGradeGradesDto.setNilaiAkhir(mdlGradeGradesIntDto.getNilaiAkhir());
+            mdlGradeGradesDto.setBobot(mdlGradeGradesIntDto.getBobot());
+
+
+            nilaiuas2.add(mdlGradeGradesDto);
+        }
+
+        return nilaiuas2;
+
+    }
+
+    @GetMapping("/api/nilaitugaspermhs")
+    @ResponseBody
+    public List<MdlGradeGradesDto> nilaitugaspermhs(){
+
+        List<MdlGradeGradesIntDto> nilaitugaspermhs1 = mdlGradeItemsDao.getGradesTugasPerMhs();
+        List<MdlGradeGradesDto> nilaitugaspermhs2 = new ArrayList<>();
+
+        for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaitugaspermhs1){
+            MdlGradeGradesDto mdlGradeGradesDto = new MdlGradeGradesDto();
+
+            mdlGradeGradesDto.setId(mdlGradeGradesIntDto.getId());
+            mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
+            mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
+            mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
+            mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
+            mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
+            mdlGradeGradesDto.setNilai(mdlGradeGradesIntDto.getNilai());
+            mdlGradeGradesDto.setNilaiAkhir(mdlGradeGradesIntDto.getNilaiAkhir());
+            mdlGradeGradesDto.setBobot(mdlGradeGradesIntDto.getBobot());
+
+
+            nilaitugaspermhs2.add(mdlGradeGradesDto);
+        }
+
+        return nilaitugaspermhs2;
+
+    }
+
+    @GetMapping("/api/nilaitugasperuts")
+    @ResponseBody
+    public List<MdlGradeGradesDto> nilaitugasperuts(){
+
+        List<MdlGradeGradesIntDto> nilaitugasperuts1 = mdlGradeItemsDao.getGradesUtsPerMhs();
+        List<MdlGradeGradesDto> nilaitugasperuts2 = new ArrayList<>();
+
+        for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaitugasperuts1){
+            MdlGradeGradesDto mdlGradeGradesDto = new MdlGradeGradesDto();
+
+            mdlGradeGradesDto.setId(mdlGradeGradesIntDto.getId());
+            mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
+            mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
+            mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
+            mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
+            mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
+            mdlGradeGradesDto.setNilai(mdlGradeGradesIntDto.getNilai());
+            mdlGradeGradesDto.setNilaiAkhir(mdlGradeGradesIntDto.getNilaiAkhir());
+            mdlGradeGradesDto.setBobot(mdlGradeGradesIntDto.getBobot());
+
+
+            nilaitugasperuts2.add(mdlGradeGradesDto);
+        }
+
+        return nilaitugasperuts2;
+
+    }
+
+    @GetMapping("/api/nilaitugasperuas")
+    @ResponseBody
+    public List<MdlGradeGradesDto> nilaitugasperuas(){
+
+        List<MdlGradeGradesIntDto> nilaitugasperuas1 = mdlGradeItemsDao.getGradesUasPerMhs();
+        List<MdlGradeGradesDto> nilaitugasperuas2 = new ArrayList<>();
+
+        for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaitugasperuas1){
+            MdlGradeGradesDto mdlGradeGradesDto = new MdlGradeGradesDto();
+
+            mdlGradeGradesDto.setId(mdlGradeGradesIntDto.getId());
+            mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
+            mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
+            mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
+            mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
+            mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
+            mdlGradeGradesDto.setNilai(mdlGradeGradesIntDto.getNilai());
+            mdlGradeGradesDto.setNilaiAkhir(mdlGradeGradesIntDto.getNilaiAkhir());
+            mdlGradeGradesDto.setBobot(mdlGradeGradesIntDto.getBobot());
+
+
+            nilaitugasperuas2.add(mdlGradeGradesDto);
+        }
+
+        return nilaitugasperuas2;
+
+    }
+
+
+
 }

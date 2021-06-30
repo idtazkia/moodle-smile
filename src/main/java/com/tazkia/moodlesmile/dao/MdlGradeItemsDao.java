@@ -47,6 +47,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
     @Query(value = "CALL GetJadwalBobotUas(?1)", nativeQuery = true)
     List<MdlGradeItemsIntDto> getItemUas(String tahunAkademik);
 
+
     @Query(value = "SELECT a.id, shortname AS idJadwal, email AS mahasiswa, idBobotTugas,finalgrade, 'AKTIF' AS STATUS, (finalgrade * bobot) /100 AS nilaiAkhir, bobot FROM \n" +
             "(SELECT a.id,a.finalgrade, ROUND((((b.aggregationcoef2 * 100) * (d.aggregationcoef2 * 100))/100),2) AS bobot,f.email,e.shortname,b.id AS idBobotTugas\n" +
             "FROM mdl_grade_grades AS a\n" +
@@ -95,5 +96,104 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             "WHERE c.fullname LIKE '%UAS%' AND e.fullname LIKE '%20201%' AND a.finalgrade IS NOT NULL) a\n" +
             "ORDER BY idJadwal,mahasiswa;", nativeQuery = true)
     List<MdlGradeGradesIntDto> getGradesUas();
+
+
+
+
+
+    @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
+            "(\n" +
+            "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilaiItem,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobotItem, d.aggregationcoef2 * 100 AS bobotCategory,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
+            "FROM mdl_grade_grades AS a\n" +
+            "INNER JOIN mdl_grade_items AS b ON a.itemid = b.id\n" +
+            "INNER JOIN mdl_grade_categories AS c ON b.categoryid = c.id\n" +
+            "INNER JOIN mdl_grade_items AS d ON d.iteminstance = b.categoryid\n" +
+            "INNER JOIN mdl_course AS e ON b.courseid = e.id AND d.courseid = e.id\n" +
+            "INNER JOIN mdl_user  AS f ON a.userid = f.id\n" +
+            "WHERE c.fullname LIKE '%TUGAS%' AND trim(e.idnumber) = ?1 AND a.finalgrade IS NOT NULL\n" +
+            ") nilai_tugas_elearning where ROUND((bobotItem * bobotCategory)/100,2)  > 0\n" +
+            "GROUP BY idnumber,mahasiswa\n" +
+            "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
+    List<MdlGradeGradesIntDto> getGradesTugas2();
+
+    @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
+            "(\n" +
+            "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilaiItem,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobotItem, d.aggregationcoef2 * 100 AS bobotCategory,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
+            "FROM mdl_grade_grades AS a\n" +
+            "INNER JOIN mdl_grade_items AS b ON a.itemid = b.id\n" +
+            "INNER JOIN mdl_grade_categories AS c ON b.categoryid = c.id\n" +
+            "INNER JOIN mdl_grade_items AS d ON d.iteminstance = b.categoryid\n" +
+            "INNER JOIN mdl_course AS e ON b.courseid = e.id AND d.courseid = e.id\n" +
+            "INNER JOIN mdl_user  AS f ON a.userid = f.id\n" +
+            "WHERE c.fullname LIKE '%UTS%' AND trim(e.idnumber) = ?1 AND a.finalgrade IS NOT NULL\n" +
+            ") nilai_uts_elearning where ROUND((bobotItem * bobotCategory)/100,2)  > 0 \n" +
+            "GROUP BY idnumber,mahasiswa\n" +
+            "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
+    List<MdlGradeGradesIntDto> getGradesUts2();
+
+    @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
+            "(\n" +
+            "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilaiItem,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobotItem, d.aggregationcoef2 * 100 AS bobotCategory,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
+            "FROM mdl_grade_grades AS a\n" +
+            "INNER JOIN mdl_grade_items AS b ON a.itemid = b.id\n" +
+            "INNER JOIN mdl_grade_categories AS c ON b.categoryid = c.id\n" +
+            "INNER JOIN mdl_grade_items AS d ON d.iteminstance = b.categoryid\n" +
+            "INNER JOIN mdl_course AS e ON b.courseid = e.id AND d.courseid = e.id\n" +
+            "INNER JOIN mdl_user  AS f ON a.userid = f.id\n" +
+            "WHERE c.fullname LIKE '%UAS%' AND trim(e.idnumber) = ?1 AND a.finalgrade IS NOT NULL\n" +
+            ") nilai_uts_elearning where ROUND((bobotItem * bobotCategory)/100,2)  > 0 \n" +
+            "GROUP BY idnumber,mahasiswa\n" +
+            "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
+    List<MdlGradeGradesIntDto> getGradesUas2();
+
+
+    @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
+            "(\n" +
+            "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilai_item,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobot_item, d.aggregationcoef2 * 100 AS bobot_category,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
+            "FROM mdl_grade_grades AS a\n" +
+            "INNER JOIN mdl_grade_items AS b ON a.itemid = b.id\n" +
+            "INNER JOIN mdl_grade_categories AS c ON b.categoryid = c.id\n" +
+            "INNER JOIN mdl_grade_items AS d ON d.iteminstance = b.categoryid\n" +
+            "INNER JOIN mdl_course AS e ON b.courseid = e.id AND d.courseid = e.id\n" +
+            "INNER JOIN mdl_user  AS f ON a.userid = f.id\n" +
+            "WHERE c.fullname LIKE '%TUGAS%' AND trim(e.idnumber) = ?1 \n" +
+            "and f.idnumber = ?2 AND a.finalgrade IS NOT NULL\n" +
+            ") nilai_tugas_elearning where ROUND((bobot_item * bobot_category)/100,2)  > 0\n" +
+            "GROUP BY idnumber,mahasiswa\n" +
+            "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
+    List<MdlGradeGradesIntDto> getGradesTugasPerMhs();
+
+    @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
+            "(\n" +
+            "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilai_item,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobot_item, d.aggregationcoef2 * 100 AS bobot_category,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
+            "FROM mdl_grade_grades AS a\n" +
+            "INNER JOIN mdl_grade_items AS b ON a.itemid = b.id\n" +
+            "INNER JOIN mdl_grade_categories AS c ON b.categoryid = c.id\n" +
+            "INNER JOIN mdl_grade_items AS d ON d.iteminstance = b.categoryid\n" +
+            "INNER JOIN mdl_course AS e ON b.courseid = e.id AND d.courseid = e.id\n" +
+            "INNER JOIN mdl_user  AS f ON a.userid = f.id\n" +
+            "WHERE c.fullname LIKE '%UTS%' AND trim(e.idnumber) = ?1 \n" +
+            "and f.idnumber = ?2 AND a.finalgrade IS NOT NULL\n" +
+            ") nilai_tugas_elearning where ROUND((bobot_item * bobot_category)/100,2)  > 0\n" +
+            "GROUP BY idnumber,mahasiswa\n" +
+            "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
+    List<MdlGradeGradesIntDto> getGradesUtsPerMhs();
+
+    @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
+            "(\n" +
+            "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilai_item,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobot_item, d.aggregationcoef2 * 100 AS bobot_category,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
+            "FROM mdl_grade_grades AS a\n" +
+            "INNER JOIN mdl_grade_items AS b ON a.itemid = b.id\n" +
+            "INNER JOIN mdl_grade_categories AS c ON b.categoryid = c.id\n" +
+            "INNER JOIN mdl_grade_items AS d ON d.iteminstance = b.categoryid\n" +
+            "INNER JOIN mdl_course AS e ON b.courseid = e.id AND d.courseid = e.id\n" +
+            "INNER JOIN mdl_user  AS f ON a.userid = f.id\n" +
+            "WHERE c.fullname LIKE '%UAS%' AND trim(e.idnumber) = ?1 \n" +
+            "and f.idnumber = ?2 AND a.finalgrade IS NOT NULL\n" +
+            ") nilai_tugas_elearning where ROUND((bobot_item * bobot_category)/100,2)  > 0\n" +
+            "GROUP BY idnumber,mahasiswa\n" +
+            "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
+    List<MdlGradeGradesIntDto> getGradesUasPerMhs();
+
 
 }

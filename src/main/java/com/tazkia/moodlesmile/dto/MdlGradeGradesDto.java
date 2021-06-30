@@ -9,9 +9,11 @@ import java.math.BigInteger;
 public class MdlGradeGradesDto {
 
     private BigInteger id;
+    private String idNumber;
     private String idJadwal;
     private String mahasiswa;
     private BigInteger idBobotTugas;
+    private BigDecimal finalgrade;
     private BigDecimal nilai;
     private String status;
     private BigDecimal nilaiAkhir;
