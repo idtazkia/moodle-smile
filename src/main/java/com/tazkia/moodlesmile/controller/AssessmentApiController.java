@@ -235,11 +235,13 @@ public class AssessmentApiController {
     }
 
 
+
+
     @GetMapping("/api/nilaitugas2")
     @ResponseBody
-    public List<MdlGradeGradesDto> nilaitugas2(){
+    public List<MdlGradeGradesDto> nilaitugas2(@RequestParam String jadwal){
 
-        List<MdlGradeGradesIntDto> nilaitugas1 = mdlGradeItemsDao.getGradesTugas2();
+        List<MdlGradeGradesIntDto> nilaitugas1 = mdlGradeItemsDao.getGradesTugas2(jadwal);
         List<MdlGradeGradesDto> nilaitugas2 = new ArrayList<>();
 
         for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaitugas1){
@@ -267,9 +269,9 @@ public class AssessmentApiController {
 
     @GetMapping("/api/nilaiuts2")
     @ResponseBody
-    public List<MdlGradeGradesDto> nilaiuts2(){
+    public List<MdlGradeGradesDto> nilaiuts2(@RequestParam String jadwal){
 
-        List<MdlGradeGradesIntDto> nilaiuts1 = mdlGradeItemsDao.getGradesUts2();
+        List<MdlGradeGradesIntDto> nilaiuts1 = mdlGradeItemsDao.getGradesUts2(jadwal);
         List<MdlGradeGradesDto> nilaiuts2 = new ArrayList<>();
 
         for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaiuts1){
@@ -296,9 +298,9 @@ public class AssessmentApiController {
 
     @GetMapping("/api/nilaiuas2")
     @ResponseBody
-    public List<MdlGradeGradesDto> nilaiuas2(){
+    public List<MdlGradeGradesDto> nilaiuas2(@RequestParam String jadwal){
 
-        List<MdlGradeGradesIntDto> nilaiuas1 = mdlGradeItemsDao.getGradesUas2();
+        List<MdlGradeGradesIntDto> nilaiuas1 = mdlGradeItemsDao.getGradesUas2(jadwal);
         List<MdlGradeGradesDto> nilaiuas2 = new ArrayList<>();
 
         for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaiuas1){
@@ -325,9 +327,9 @@ public class AssessmentApiController {
 
     @GetMapping("/api/nilaitugaspermhs")
     @ResponseBody
-    public List<MdlGradeGradesDto> nilaitugaspermhs(){
+    public List<MdlGradeGradesDto> nilaitugaspermhs(String jadwal, String mahasiswa){
 
-        List<MdlGradeGradesIntDto> nilaitugaspermhs1 = mdlGradeItemsDao.getGradesTugasPerMhs();
+        List<MdlGradeGradesIntDto> nilaitugaspermhs1 = mdlGradeItemsDao.getGradesTugasPerMhs(jadwal,mahasiswa);
         List<MdlGradeGradesDto> nilaitugaspermhs2 = new ArrayList<>();
 
         for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaitugaspermhs1){
@@ -352,14 +354,14 @@ public class AssessmentApiController {
 
     }
 
-    @GetMapping("/api/nilaitugasperuts")
+    @GetMapping("/api/nilaiutspermhs")
     @ResponseBody
-    public List<MdlGradeGradesDto> nilaitugasperuts(){
+    public List<MdlGradeGradesDto> nilaiutspermhs(String jadwal, String mahasiswa){
 
-        List<MdlGradeGradesIntDto> nilaitugasperuts1 = mdlGradeItemsDao.getGradesUtsPerMhs();
-        List<MdlGradeGradesDto> nilaitugasperuts2 = new ArrayList<>();
+        List<MdlGradeGradesIntDto> nilaiutspermhs1 = mdlGradeItemsDao.getGradesUtsPerMhs(jadwal,mahasiswa);
+        List<MdlGradeGradesDto> nilaiutspermhs2 = new ArrayList<>();
 
-        for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaitugasperuts1){
+        for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaiutspermhs1){
             MdlGradeGradesDto mdlGradeGradesDto = new MdlGradeGradesDto();
 
             mdlGradeGradesDto.setId(mdlGradeGradesIntDto.getId());
@@ -374,21 +376,21 @@ public class AssessmentApiController {
             mdlGradeGradesDto.setBobot(mdlGradeGradesIntDto.getBobot());
 
 
-            nilaitugasperuts2.add(mdlGradeGradesDto);
+            nilaiutspermhs2.add(mdlGradeGradesDto);
         }
 
-        return nilaitugasperuts2;
+        return nilaiutspermhs2;
 
     }
 
-    @GetMapping("/api/nilaitugasperuas")
+    @GetMapping("/api/nilaiuaspermhs")
     @ResponseBody
-    public List<MdlGradeGradesDto> nilaitugasperuas(){
+    public List<MdlGradeGradesDto> nilaiuaspermhs(String jadwal, String mahasiswa){
 
-        List<MdlGradeGradesIntDto> nilaitugasperuas1 = mdlGradeItemsDao.getGradesUasPerMhs();
-        List<MdlGradeGradesDto> nilaitugasperuas2 = new ArrayList<>();
+        List<MdlGradeGradesIntDto> nilaiuaspermhs1 = mdlGradeItemsDao.getGradesUasPerMhs(jadwal, mahasiswa);
+        List<MdlGradeGradesDto> nilaiuaspermhs2 = new ArrayList<>();
 
-        for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaitugasperuas1){
+        for (MdlGradeGradesIntDto mdlGradeGradesIntDto : nilaiuaspermhs1){
             MdlGradeGradesDto mdlGradeGradesDto = new MdlGradeGradesDto();
 
             mdlGradeGradesDto.setId(mdlGradeGradesIntDto.getId());
@@ -403,10 +405,10 @@ public class AssessmentApiController {
             mdlGradeGradesDto.setBobot(mdlGradeGradesIntDto.getBobot());
 
 
-            nilaitugasperuas2.add(mdlGradeGradesDto);
+            nilaiuaspermhs2.add(mdlGradeGradesDto);
         }
 
-        return nilaitugasperuas2;
+        return nilaiuaspermhs2;
 
     }
 

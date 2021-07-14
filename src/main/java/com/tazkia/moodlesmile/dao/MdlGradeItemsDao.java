@@ -114,7 +114,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             ") nilai_tugas_elearning where ROUND((bobotItem * bobotCategory)/100,2)  > 0\n" +
             "GROUP BY idnumber,mahasiswa\n" +
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
-    List<MdlGradeGradesIntDto> getGradesTugas2();
+    List<MdlGradeGradesIntDto> getGradesTugas2(String jadwal);
 
     @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
             "(\n" +
@@ -129,7 +129,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             ") nilai_uts_elearning where ROUND((bobotItem * bobotCategory)/100,2)  > 0 \n" +
             "GROUP BY idnumber,mahasiswa\n" +
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
-    List<MdlGradeGradesIntDto> getGradesUts2();
+    List<MdlGradeGradesIntDto> getGradesUts2(String jadwal);
 
     @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
             "(\n" +
@@ -144,7 +144,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             ") nilai_uts_elearning where ROUND((bobotItem * bobotCategory)/100,2)  > 0 \n" +
             "GROUP BY idnumber,mahasiswa\n" +
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
-    List<MdlGradeGradesIntDto> getGradesUas2();
+    List<MdlGradeGradesIntDto> getGradesUas2(String jadwal);
 
 
     @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
@@ -161,7 +161,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             ") nilai_tugas_elearning where ROUND((bobot_item * bobot_category)/100,2)  > 0\n" +
             "GROUP BY idnumber,mahasiswa\n" +
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
-    List<MdlGradeGradesIntDto> getGradesTugasPerMhs();
+    List<MdlGradeGradesIntDto> getGradesTugasPerMhs(String jadwal, String mahasiswa);
 
     @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
             "(\n" +
@@ -177,7 +177,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             ") nilai_tugas_elearning where ROUND((bobot_item * bobot_category)/100,2)  > 0\n" +
             "GROUP BY idnumber,mahasiswa\n" +
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
-    List<MdlGradeGradesIntDto> getGradesUtsPerMhs();
+    List<MdlGradeGradesIntDto> getGradesUtsPerMhs(String jadwal, String mahasiswa);
 
     @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
             "(\n" +
@@ -193,7 +193,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             ") nilai_tugas_elearning where ROUND((bobot_item * bobot_category)/100,2)  > 0\n" +
             "GROUP BY idnumber,mahasiswa\n" +
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
-    List<MdlGradeGradesIntDto> getGradesUasPerMhs();
+    List<MdlGradeGradesIntDto> getGradesUasPerMhs(String jadwal, String mahasiswa);
 
 
 }
