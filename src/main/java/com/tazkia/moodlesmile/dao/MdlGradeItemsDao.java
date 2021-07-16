@@ -33,19 +33,19 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
 //    List<MdlGradeItemsIntDto> findItemTugas();
 
     //find tugas
-    @Query(value = "CALL GetjadwalBobotTugas4(?1)", nativeQuery = true)
-    List<MdlGradeItemsIntDto> getItemTugas(String tahunAkademik);
+    @Query(value = "CALL GetjadwalBobotTugas5(?1)", nativeQuery = true)
+    List<MdlGradeItemsIntDto> getItemTugas(String jadwal);
     //find tugas asli
-    @Query(value = "CALL GetjadwalBobotAsliTugas6(?1)", nativeQuery = true)
-    List<MdlGradeItemsIntDto> getItemAsliTugas(String tahunAkademik);
+    @Query(value = "CALL GetjadwalBobotAsliTugas7(?1)", nativeQuery = true)
+    List<MdlGradeItemsIntDto> getItemAsliTugas(String jadwal);
 
     //find uts
-    @Query(value = "CALL GetJadwalBobotUts(?1)", nativeQuery = true)
-    List<MdlGradeItemsIntDto> getItemUts(String tahunAkademik);
+    @Query(value = "CALL GetJadwalBobotUts2(?1)", nativeQuery = true)
+    List<MdlGradeItemsIntDto> getItemUts(String jadwal);
 
     //find uas
-    @Query(value = "CALL GetJadwalBobotUas(?1)", nativeQuery = true)
-    List<MdlGradeItemsIntDto> getItemUas(String tahunAkademik);
+    @Query(value = "CALL GetJadwalBobotUas2(?1)", nativeQuery = true)
+    List<MdlGradeItemsIntDto> getItemUas(String jadwal);
 
 
     @Query(value = "SELECT a.id, shortname AS idJadwal, email AS mahasiswa, idBobotTugas,finalgrade, 'AKTIF' AS STATUS, (finalgrade * bobot) /100 AS nilaiAkhir, bobot FROM \n" +
@@ -101,7 +101,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
 
 
 
-    @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
+    @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa,email as email, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
             "(\n" +
             "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilaiItem,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobotItem, d.aggregationcoef2 * 100 AS bobotCategory,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
             "FROM mdl_grade_grades AS a\n" +
@@ -116,7 +116,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
     List<MdlGradeGradesIntDto> getGradesTugas2(String jadwal);
 
-    @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
+    @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa, email as email, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
             "(\n" +
             "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilaiItem,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobotItem, d.aggregationcoef2 * 100 AS bobotCategory,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
             "FROM mdl_grade_grades AS a\n" +
@@ -131,7 +131,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
     List<MdlGradeGradesIntDto> getGradesUts2(String jadwal);
 
-    @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
+    @Query(value = "SELECT id, idnumber as idNumber, idnumber AS idJadwal, mahasiswa,email as email, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilaiItem)as nilai, SUM(ROUND((nilaiItem * bobotCategory)/100,2)) AS nilaiAkhir,  bobotCategory AS bobot FROM \n" +
             "(\n" +
             "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilaiItem,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobotItem, d.aggregationcoef2 * 100 AS bobotCategory,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
             "FROM mdl_grade_grades AS a\n" +
@@ -141,13 +141,13 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             "INNER JOIN mdl_course AS e ON b.courseid = e.id AND d.courseid = e.id\n" +
             "INNER JOIN mdl_user  AS f ON a.userid = f.id\n" +
             "WHERE c.fullname LIKE '%UAS%' AND trim(e.idnumber) = ?1 AND a.finalgrade IS NOT NULL\n" +
-            ") nilai_uts_elearning where ROUND((bobotItem * bobotCategory)/100,2)  > 0 \n" +
+            ") nilai_uas_elearning where ROUND((bobotItem * bobotCategory)/100,2)  > 0 \n" +
             "GROUP BY idnumber,mahasiswa\n" +
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
     List<MdlGradeGradesIntDto> getGradesUas2(String jadwal);
 
 
-    @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
+    @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa,email as email, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
             "(\n" +
             "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilai_item,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobot_item, d.aggregationcoef2 * 100 AS bobot_category,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
             "FROM mdl_grade_grades AS a\n" +
@@ -163,7 +163,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
     List<MdlGradeGradesIntDto> getGradesTugasPerMhs(String jadwal, String mahasiswa);
 
-    @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
+    @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa,email as email, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
             "(\n" +
             "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilai_item,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobot_item, d.aggregationcoef2 * 100 AS bobot_category,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
             "FROM mdl_grade_grades AS a\n" +
@@ -172,14 +172,14 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             "INNER JOIN mdl_grade_items AS d ON d.iteminstance = b.categoryid\n" +
             "INNER JOIN mdl_course AS e ON b.courseid = e.id AND d.courseid = e.id\n" +
             "INNER JOIN mdl_user  AS f ON a.userid = f.id\n" +
-            "WHERE c.fullname LIKE '%UTS%' AND trim(e.idnumber) = ?1 \n" +
+            "WHERE c.fullname LIKE '%UTS%' AND TRIM(REPLACE(REPLACE(REPLACE(e.idnumber, '\n', ' '), '\r', ' '), '\t', ' ')) = ?1 \n" +
             "and f.idnumber = ?2 AND a.finalgrade IS NOT NULL\n" +
             ") nilai_tugas_elearning where ROUND((bobot_item * bobot_category)/100,2)  > 0\n" +
             "GROUP BY idnumber,mahasiswa\n" +
             "ORDER BY idnumber,mahasiswa;", nativeQuery = true)
     List<MdlGradeGradesIntDto> getGradesUtsPerMhs(String jadwal, String mahasiswa);
 
-    @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
+    @Query(value = "SELECT id, idnumber, idnumber AS idJadwal, mahasiswa,email as email, idBobotTugas,SUM(ROUND(finalgrade,2)) AS finalgrade, 'AKTIF' AS STATUS,sum(nilai_item)as nilai, SUM(ROUND((nilai_item * bobot_category)/100,2)) AS nilaiAkhir,  bobot_category AS bobot FROM \n" +
             "(\n" +
             "SELECT COALESCE(f.idnumber,f.username,f.email,f.id) AS mahasiswa, a.id,ROUND(((a.finalgrade * (b.aggregationcoef2 * 100))/ a.rawgrademax),2) AS nilai_item,  a.finalgrade, a.rawgrademax, b.aggregationcoef2 * 100 AS bobot_item, d.aggregationcoef2 * 100 AS bobot_category,f.email,e.shortname,b.id AS idBobotTugas, e.idnumber\n" +
             "FROM mdl_grade_grades AS a\n" +

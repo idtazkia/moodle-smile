@@ -10,6 +10,7 @@ public interface MdlGradeGradesIntDto {
     String getIdNumber();
     String getIdJadwal();
     String getMahasiswa();
+    String getEmail();
     BigInteger getIdBobotTugas();
     BigDecimal getFinalgrade();
     BigDecimal getNilai();

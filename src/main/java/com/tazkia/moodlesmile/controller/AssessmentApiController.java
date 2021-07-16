@@ -23,9 +23,9 @@ public class AssessmentApiController {
     //tugas
     @GetMapping("/api/bobottugas")
     @ResponseBody
-    public List<MdlGradeItemsDto> bobotTugas(String tahunAkademik){
+        public List<MdlGradeItemsDto> bobotTugas(String jadwal){
 
-        List<MdlGradeItemsIntDto> tugas1 = mdlGradeItemsDao.getItemTugas(tahunAkademik);
+        List<MdlGradeItemsIntDto> tugas1 = mdlGradeItemsDao.getItemTugas(jadwal);
         List<MdlGradeItemsDto> tugas2 = new ArrayList<>();
 
         for (MdlGradeItemsIntDto mdlGradeItemsIntDto : tugas1){
@@ -49,9 +49,9 @@ public class AssessmentApiController {
 
     @GetMapping("/api/bobotaslitugas")
     @ResponseBody
-    public List<MdlGradeItemsDto> bobotAsliTugas(String tahunAkademik){
+    public List<MdlGradeItemsDto> bobotAsliTugas(String jadwal){
 
-        List<MdlGradeItemsIntDto> tugasA1 = mdlGradeItemsDao.getItemAsliTugas(tahunAkademik);
+        List<MdlGradeItemsIntDto> tugasA1 = mdlGradeItemsDao.getItemAsliTugas(jadwal);
         List<MdlGradeItemsDto> tugasA2 = new ArrayList<>();
 
         for (MdlGradeItemsIntDto mdlGradeItemsIntDto : tugasA1){
@@ -75,9 +75,9 @@ public class AssessmentApiController {
 
     @GetMapping("/api/bobotuts")
     @ResponseBody
-    public List<MdlGradeItemsDto> bobotUts(String tahunAkademik){
+    public List<MdlGradeItemsDto> bobotUts(String jadwal){
 
-        List<MdlGradeItemsIntDto> uts1 = mdlGradeItemsDao.getItemUts(tahunAkademik);
+        List<MdlGradeItemsIntDto> uts1 = mdlGradeItemsDao.getItemUts(jadwal);
         List<MdlGradeItemsDto> uts2 = new ArrayList<>();
 
         for (MdlGradeItemsIntDto mdlGradeItemsIntDto : uts1){
@@ -101,9 +101,9 @@ public class AssessmentApiController {
 
     @GetMapping("/api/bobotuas")
     @ResponseBody
-    public List<MdlGradeItemsDto> bobotUas(String tahunAkademik){
+    public List<MdlGradeItemsDto> bobotUas(String jadwal){
 
-        List<MdlGradeItemsIntDto> uas1 = mdlGradeItemsDao.getItemUas(tahunAkademik);
+        List<MdlGradeItemsIntDto> uas1 = mdlGradeItemsDao.getItemUas(jadwal);
         List<MdlGradeItemsDto> uas2 = new ArrayList<>();
 
         for (MdlGradeItemsIntDto mdlGradeItemsIntDto : uas1){
@@ -251,6 +251,7 @@ public class AssessmentApiController {
             mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
             mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
             mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setEmail(mdlGradeGradesIntDto.getEmail());
             mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
             mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
             mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
@@ -281,6 +282,7 @@ public class AssessmentApiController {
             mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
             mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
             mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setEmail(mdlGradeGradesIntDto.getEmail());
             mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
             mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
             mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
@@ -310,6 +312,7 @@ public class AssessmentApiController {
             mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
             mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
             mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setEmail(mdlGradeGradesIntDto.getEmail());
             mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
             mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
             mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
@@ -339,6 +342,7 @@ public class AssessmentApiController {
             mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
             mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
             mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setEmail(mdlGradeGradesIntDto.getEmail());
             mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
             mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
             mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
@@ -368,6 +372,7 @@ public class AssessmentApiController {
             mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
             mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
             mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setEmail(mdlGradeGradesIntDto.getEmail());
             mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
             mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
             mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
@@ -397,6 +402,7 @@ public class AssessmentApiController {
             mdlGradeGradesDto.setIdNumber(mdlGradeGradesIntDto.getIdNumber());
             mdlGradeGradesDto.setIdJadwal(mdlGradeGradesIntDto.getIdJadwal());
             mdlGradeGradesDto.setMahasiswa(mdlGradeGradesIntDto.getMahasiswa());
+            mdlGradeGradesDto.setEmail(mdlGradeGradesIntDto.getEmail());
             mdlGradeGradesDto.setIdBobotTugas(mdlGradeGradesIntDto.getIdBobotTugas());
             mdlGradeGradesDto.setFinalgrade(mdlGradeGradesIntDto.getFinalgrade());
             mdlGradeGradesDto.setStatus(mdlGradeGradesIntDto.getStatus());
