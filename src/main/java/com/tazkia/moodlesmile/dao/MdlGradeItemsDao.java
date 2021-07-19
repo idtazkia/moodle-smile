@@ -34,18 +34,18 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
 
     //find tugas
     @Query(value = "CALL GetjadwalBobotTugas5(?1)", nativeQuery = true)
-    List<MdlGradeItemsIntDto> getItemTugas(String jadwal);
+    List<MdlGradeItemsIntDto> getItemTugas(String tahunAkademik);
     //find tugas asli
     @Query(value = "CALL GetjadwalBobotAsliTugas7(?1)", nativeQuery = true)
-    List<MdlGradeItemsIntDto> getItemAsliTugas(String jadwal);
+    List<MdlGradeItemsIntDto> getItemAsliTugas(String tahunAkademik);
 
     //find uts
     @Query(value = "CALL GetJadwalBobotUts2(?1)", nativeQuery = true)
-    List<MdlGradeItemsIntDto> getItemUts(String jadwal);
+    List<MdlGradeItemsIntDto> getItemUts(String tahunAkademik);
 
     //find uas
     @Query(value = "CALL GetJadwalBobotUas2(?1)", nativeQuery = true)
-    List<MdlGradeItemsIntDto> getItemUas(String jadwal);
+    List<MdlGradeItemsIntDto> getItemUas(String tahunAkademik);
 
 
     @Query(value = "SELECT a.id, shortname AS idJadwal, email AS mahasiswa, idBobotTugas,finalgrade, 'AKTIF' AS STATUS, (finalgrade * bobot) /100 AS nilaiAkhir, bobot FROM \n" +
@@ -172,7 +172,7 @@ public interface MdlGradeItemsDao extends PagingAndSortingRepository<MdlGradeIte
             "INNER JOIN mdl_grade_items AS d ON d.iteminstance = b.categoryid\n" +
             "INNER JOIN mdl_course AS e ON b.courseid = e.id AND d.courseid = e.id\n" +
             "INNER JOIN mdl_user  AS f ON a.userid = f.id\n" +
-            "WHERE c.fullname LIKE '%UTS%' AND TRIM(REPLACE(REPLACE(REPLACE(e.idnumber, '\n', ' '), '\r', ' '), '\t', ' ')) = ?1 \n" +
+            "WHERE c.fullname LIKE '%UTS%' AND trim(e.idnumber) = ?1 \n" +
             "and f.idnumber = ?2 AND a.finalgrade IS NOT NULL\n" +
             ") nilai_tugas_elearning where ROUND((bobot_item * bobot_category)/100,2)  > 0\n" +
             "GROUP BY idnumber,mahasiswa\n" +

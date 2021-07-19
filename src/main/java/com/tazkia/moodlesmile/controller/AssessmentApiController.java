@@ -23,9 +23,9 @@ public class AssessmentApiController {
     //tugas
     @GetMapping("/api/bobottugas")
     @ResponseBody
-        public List<MdlGradeItemsDto> bobotTugas(String jadwal){
+        public List<MdlGradeItemsDto> bobotTugas(String tahunAkademik){
 
-        List<MdlGradeItemsIntDto> tugas1 = mdlGradeItemsDao.getItemTugas(jadwal);
+        List<MdlGradeItemsIntDto> tugas1 = mdlGradeItemsDao.getItemTugas(tahunAkademik);
         List<MdlGradeItemsDto> tugas2 = new ArrayList<>();
 
         for (MdlGradeItemsIntDto mdlGradeItemsIntDto : tugas1){
@@ -49,9 +49,9 @@ public class AssessmentApiController {
 
     @GetMapping("/api/bobotaslitugas")
     @ResponseBody
-    public List<MdlGradeItemsDto> bobotAsliTugas(String jadwal){
+    public List<MdlGradeItemsDto> bobotAsliTugas(String tahunAkademik){
 
-        List<MdlGradeItemsIntDto> tugasA1 = mdlGradeItemsDao.getItemAsliTugas(jadwal);
+        List<MdlGradeItemsIntDto> tugasA1 = mdlGradeItemsDao.getItemAsliTugas(tahunAkademik);
         List<MdlGradeItemsDto> tugasA2 = new ArrayList<>();
 
         for (MdlGradeItemsIntDto mdlGradeItemsIntDto : tugasA1){
@@ -75,9 +75,9 @@ public class AssessmentApiController {
 
     @GetMapping("/api/bobotuts")
     @ResponseBody
-    public List<MdlGradeItemsDto> bobotUts(String jadwal){
+    public List<MdlGradeItemsDto> bobotUts(String tahunAkademik){
 
-        List<MdlGradeItemsIntDto> uts1 = mdlGradeItemsDao.getItemUts(jadwal);
+        List<MdlGradeItemsIntDto> uts1 = mdlGradeItemsDao.getItemUts(tahunAkademik);
         List<MdlGradeItemsDto> uts2 = new ArrayList<>();
 
         for (MdlGradeItemsIntDto mdlGradeItemsIntDto : uts1){
@@ -101,9 +101,9 @@ public class AssessmentApiController {
 
     @GetMapping("/api/bobotuas")
     @ResponseBody
-    public List<MdlGradeItemsDto> bobotUas(String jadwal){
+    public List<MdlGradeItemsDto> bobotUas(String tahunAkademik){
 
-        List<MdlGradeItemsIntDto> uas1 = mdlGradeItemsDao.getItemUas(jadwal);
+        List<MdlGradeItemsIntDto> uas1 = mdlGradeItemsDao.getItemUas(tahunAkademik);
         List<MdlGradeItemsDto> uas2 = new ArrayList<>();
 
         for (MdlGradeItemsIntDto mdlGradeItemsIntDto : uas1){
